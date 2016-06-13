@@ -21,28 +21,23 @@ class RPS < Sinatra::Base
   end
 
   get '/play' do
+     @game = Game.create
      @player_name = $player_name.name
     erb :play
   end
 
-  post '/weapon_choice' do
+  post'/weapon' do
+    @game = Game.instance
     @player_name = $player_name.name
-    $player_weapon = params[:player_weapon]
-    $opponent_weapon = (Opponent.new).weapon
-    redirect '/weapon'
-  end
-
-  get '/weapon' do
-    @player_name = $player_name.name
-    @player_weapon = $player_weapon
-    $opponent_weapon = (Opponent.new).weapon
+    session[:player_weapon] = @game.choose_weapon(params[:player_weapon])
+    @player_weapon = session[:player_weapon]
     erb :weapon
   end
 
- get '/result' do
-    @player_name = $player_name.name
-    @player_weapon = $player_weapon
-    @opponent_weapon = $opponent_weapon
+get '/result' do
+   @game = Game.instance
+   @computer_weapon = @game.computer_weapon
+   @player_weapon = session[:player_weapon]
    erb :result
  end
 

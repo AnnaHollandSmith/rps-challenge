@@ -6,9 +6,6 @@ feature 'confirming weapons' do
     sign_in_and_play
   end
 
-# As a marketeer
-# So I can play a game
-# I want to choose a weapon to play with
   scenario 'player chooses rock' do
     click_button 'rock'
     expect(page).to have_content 'Anna, your chosen weapon is: rock'
@@ -23,10 +20,4 @@ feature 'confirming weapons' do
     click_button 'scissors'
     expect(page).to have_content 'Anna, your chosen weapon is: scissors'
   end
-
-
-
-# As a marketeer
-# So I can play a game
-# I want the game to choose an weapon option
 end
